@@ -1,6 +1,8 @@
 import torch
 from sklearn.metrics import classification_report, confusion_matrix
 
+import pdb
+
 from train1 import accuracy
 
 
@@ -16,7 +18,9 @@ def tester(model, iterator, criterion):
 
             predictions = model(batch.text).squeeze(1)
 
-            loss = criterion(predictions, batch.label.float())
+            pdb.set_trace()
+
+            loss = criterion(predictions, batch.label)
 
             acc = accuracy(predictions, batch.label)
 

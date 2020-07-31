@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.optim as optim
-
+import pdb
 
 from model1 import *
 
@@ -38,7 +38,9 @@ def trainer(model, iterator, optimiser, criterion):
 
         predictions = model(batch.text).squeeze(1)
 
-        loss = criterion(predictions, batch.label.float())
+        pdb.set_trace()
+
+        loss = criterion(predictions, batch.label)
         acc = accuracy(predictions, batch.label)
         #average precision score
         
