@@ -17,15 +17,18 @@ def tester(model, iterator, criterion):
         for i, batch in enumerate(iterator):
 
             predictions = model(batch.text).squeeze(1)
+
+            #pdb.set_trace()
+
             loss = criterion(predictions, batch.label.float())
 
             acc = accuracy(predictions, batch.label)
 
-            #conMatrix = confusion_matrix(batch.label.cpu().numpy(), predictions.cpu().numpy().astype(int))
-            #classifReport = classification_report(batch.label.cpu().numpy(), predictions.cpu().numpy().astype(int))
+            conMatrix = confusion_matrix(batch.label.cpu().numpy(), predictions.cpu().numpy().astype(int))
+            classifReport = classification_report(batch.label.cpu().numpy(), predictions.cpu().numpy().astype(int))
 
             epoch_loss += loss.item()
             epoch_acc += acc.item()
 
     
-    return epoch_loss / len(iterator), epoch_acc / len(iterator)
+    return epoch_loss / len(iterator), epoch_acc / len(iterator), conMatrix, classifReport

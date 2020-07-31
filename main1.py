@@ -20,7 +20,7 @@ def trainModel():
         start_time = time.time()
 
         train_loss, train_acc = trainer(model, train_iterator, optimiser, criterion)
-        valid_loss, valid_acc = tester(model, valid_iterator, criterion)
+        valid_loss, valid_acc, valid_CM, valid_CF = tester(model, valid_iterator, criterion)
 
         end_time = time.time()
 
