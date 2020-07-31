@@ -1,6 +1,6 @@
 import torch
 import torch.nn as nn
-
+import pdb
 from preprocess_data1 import *
 from config1 import *
 
@@ -22,6 +22,7 @@ class SentimentModel(nn.Module):
 
         output, hidden = self.rnn(embedded)
 
+        
         assert torch.equal(output[-1,:,:], hidden.squeeze(0))
 
         return self.fc(hidden.squeeze(0))

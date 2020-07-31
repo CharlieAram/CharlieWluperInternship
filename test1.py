@@ -1,6 +1,8 @@
 import torch
 from sklearn.metrics import classification_report, confusion_matrix
 
+import pdb
+
 from train1 import accuracy
 
 
@@ -15,16 +17,15 @@ def tester(model, iterator, criterion):
         for i, batch in enumerate(iterator):
 
             predictions = model(batch.text).squeeze(1)
-
             loss = criterion(predictions, batch.label.float())
 
             acc = accuracy(predictions, batch.label)
 
-            conMatrix = confusion_matrix(batch.label.cpu().numpy(), predictions.cpu().numpy().astype(int))
-            classifReport = classification_report(batch.label.cpu().numpy(), predictions.cpu().numpy().astype(int))
+            #conMatrix = confusion_matrix(batch.label.cpu().numpy(), predictions.cpu().numpy().astype(int))
+            #classifReport = classification_report(batch.label.cpu().numpy(), predictions.cpu().numpy().astype(int))
 
             epoch_loss += loss.item()
             epoch_acc += acc.item()
 
     
-    return epoch_loss / len(iterator), epoch_acc / len(iterator), conMatrix, classifReport
+    return epoch_loss / len(iterator), epoch_acc / len(iterator)
